@@ -281,12 +281,13 @@ extension AdyenDropInPayment: ActionComponentDelegate {
     var parsedJson = actionJson.replacingOccurrences(of: "THREEDS2FINGERPRINT", with: "threeDS2Fingerprint")
     parsedJson = actionJson.replacingOccurrences(of: "THREEDS2CHALLENGE", with: "threeDS2Challenge")
     parsedJson = actionJson.replacingOccurrences(of: "REDIRECT", with: "redirect")
-    if(self.isDropIn!){
+    // Commenting this code to fix the app crash on 3DS2 transactions
+    /*if(self.isDropIn!){
         let actionData: Data? = parsedJson.data(using: String.Encoding.utf8) ?? Data()
         let action = try? JSONDecoder().decode(Action.self, from: actionData!)
         dropInComponent?.handle(action!)
       return;
-    }
+    }*/
     let actionData: Data? = parsedJson.data(using: String.Encoding.utf8) ?? Data()
     let action:Action? = try! JSONDecoder().decode(Action.self, from: actionData!)
 
